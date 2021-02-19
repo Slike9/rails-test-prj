@@ -20,7 +20,7 @@ jobs:
       #     sudo apt-get install -yq --no-install-recommends pcregrep
 
       - name: Run Rubocop
-        uses: reviewdog/action-rubocop@v1
+        uses: reviewdog/action-rubocop@master
         with:
           rubocop_version: gemfile
           rubocop_extensions: rubocop-rails:gemfile
