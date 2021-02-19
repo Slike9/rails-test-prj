@@ -1,0 +1,28 @@
+name: Lint
+
+on:
+  pull_request:
+
+jobs:
+  ruby:
+    name: Ruby
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+
+      # `pcregrep` is required by `reviewdog/action-rubocop`.
+      # - name: Install pcregrep
+      #   run: |
+      #     sudo apt-get -qq update
+      #     sudo apt-get install -yq --no-install-recommends pcregrep
+
+      - name: Run Rubocop
+        uses: reviewdog/action-rubocop@v1
+        with:
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
